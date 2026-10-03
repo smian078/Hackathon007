@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #000000;
+  --bg-surface: #0a0a0a;
+  --bg-card: #121212;
+  --border-subtle: #262626;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+}
+
+/* ==========================================================================
+   THEME BACKGROUND MODES
+   ========================================================================== */
+
+/* OLED Black (pure #000000 pitch black) */
+[data-theme="oled"],
+:root[data-theme="oled"] {
+  --bg-primary: #000000;
+  --bg-surface: #050505;
+  --bg-card: #0d0d0d;
+  --border-subtle: #222222;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-muted: #666666;
+}
+
+/* Midnight Dark (deep cosmic slate) */
+[data-theme="dark"],
+:root[data-theme="dark"] {
+  --bg-primary: #0b0f19;
+  --bg-surface: #111827;
+  --bg-card: #1e293b;
+  --border-subtle: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+}
+
+/* Clean Light (crisp daylight mode) */
+[data-theme="light"],
+:root[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --border-subtle: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+}
+
+/* OLED Theme Enhancements: Pure pitch black surfaces */
+[data-theme="oled"] .bg-slate-900\/60,
+[data-theme="oled"] .bg-slate-900\/80,
+[data-theme="oled"] .bg-slate-900 {
+  background-color: rgba(10, 10, 10, 0.9) !important;
+}
+
+[data-theme="oled"] .bg-slate-950,
+[data-theme="oled"] .bg-slate-950\/90,
+[data-theme="oled"] .bg-slate-950\/80 {
+  background-color: #000000 !important;
+}
+
+[data-theme="oled"] .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Universal high-contrast input text visibility guarantee */
+input, select, textarea {
+  color: inherit;
+}
+[data-theme="oled"] input,
+[data-theme="oled"] select,
+[data-theme="oled"] textarea {
+  color: #ffffff;
+}
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  color: #f8fafc;
+}
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   COLOR PALETTES
+   Dynamically overrides Tailwind's accent color variables throughout the UI
+   (Overriding cyan, blue, and sky families so all existing components adapt)
+   ========================================================================== */
+
+/* 1. Cyber Sky (Cyan) */
+[data-palette="cyan"],
+:root[data-palette="cyan"] {
+  --accent-primary: #06b6d4;
+  --accent-secondary: #38bdf8;
+  --accent-glow: rgba(6, 182, 212, 0.35);
+  --accent-subtle: rgba(6, 182, 212, 0.12);
+
+  --color-cyan-50: #ecfeff;
+  --color-cyan-100: #cffafe;
+  --color-cyan-200: #a5f3fc;
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-cyan-700: #0e7490;
+  --color-cyan-800: #155e75;
+  --color-cyan-900: #164e63;
+  --color-cyan-950: #083344;
+
+  --color-blue-50: #ecfeff;
+  --color-blue-100: #cffafe;
+  --color-blue-200: #a5f3fc;
+  --color-blue-300: #67e8f9;
+  --color-blue-400: #22d3ee;
+  --color-blue-500: #06b6d4;
+  --color-blue-600: #0891b2;
+  --color-blue-700: #0e7490;
+  --color-blue-800: #155e75;
+  --color-blue-900: #164e63;
+  --color-blue-950: #083344;
+
+  --color-sky-50: #ecfeff;
+  --color-sky-100: #cffafe;
+  --color-sky-200: #a5f3fc;
+  --color-sky-300: #67e8f9;
+  --color-sky-400: #22d3ee;
+  --color-sky-500: #06b6d4;
+  --color-sky-600: #0891b2;
+  --color-sky-700: #0e7490;
+}
+
+/* 2. Neo Emerald (Jade Matrix) */
+[data-palette="emerald"],
+:root[data-palette="emerald"] {
+  --accent-primary: #10b981;
+  --accent-secondary: #34d399;
+  --accent-glow: rgba(16, 185, 129, 0.35);
+  --accent-subtle: rgba(16, 185, 129, 0.12);
+
+  --color-cyan-50: #ecfdf5;
+  --color-cyan-100: #d1fae5;
+  --color-cyan-200: #a7f3d0;
+  --color-cyan-300: #6ee7b7;
+  --color-cyan-400: #34d399;
+  --color-cyan-500: #10b981;
+  --color-cyan-600: #059669;
+  --color-cyan-700: #047857;
+  --color-cyan-800: #065f46;
+  --color-cyan-900: #064e3b;
+  --color-cyan-950: #022c22;
+
+  --color-blue-50: #ecfdf5;
+  --color-blue-100: #d1fae5;
+  --color-blue-200: #a7f3d0;
+  --color-blue-300: #6ee7b7;
+  --color-blue-400: #34d399;
+  --color-blue-500: #10b981;
+  --color-blue-600: #059669;
+  --color-blue-700: #047857;
+  --color-blue-800: #065f46;
+  --color-blue-900: #064e3b;
+  --color-blue-950: #022c22;
+
+  --color-sky-400: #34d399;
+  --color-sky-500: #10b981;
+  --color-sky-600: #059669;
+
+  --color-indigo-400: #2dd4bf;
+  --color-indigo-500: #0d9488;
+  --color-indigo-600: #0f766e;
+  --color-violet-400: #34d399;
+  --color-violet-500: #059669;
+  --color-violet-600: #047857;
+}
+
+/* 3. Cosmic Violet (Royal Indigo) */
+[data-palette="indigo"],
+:root[data-palette="indigo"] {
+  --accent-primary: #6366f1;
+  --accent-secondary: #818cf8;
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --accent-subtle: rgba(99, 102, 241, 0.12);
+
+  --color-cyan-50: #eef2ff;
+  --color-cyan-100: #e0e7ff;
+  --color-cyan-200: #c7d2fe;
+  --color-cyan-300: #a5b4fc;
+  --color-cyan-400: #818cf8;
+  --color-cyan-500: #6366f1;
+  --color-cyan-600: #4f46e5;
+  --color-cyan-700: #4338ca;
+  --color-cyan-800: #3730a3;
+  --color-cyan-900: #312e81;
+  --color-cyan-950: #1e1b4b;
+
+  --color-blue-50: #eef2ff;
+  --color-blue-100: #e0e7ff;
+  --color-blue-200: #c7d2fe;
+  --color-blue-300: #a5b4fc;
+  --color-blue-400: #818cf8;
+  --color-blue-500: #6366f1;
+  --color-blue-600: #4f46e5;
+  --color-blue-700: #4338ca;
+  --color-blue-800: #3730a3;
+  --color-blue-900: #312e81;
+  --color-blue-950: #1e1b4b;
+
+  --color-sky-400: #818cf8;
+  --color-sky-500: #6366f1;
+  --color-sky-600: #4f46e5;
+
+  --color-indigo-400: #a78bfa;
+  --color-indigo-500: #8b5cf6;
+  --color-indigo-600: #7c3aed;
+  --color-violet-400: #c084fc;
+  --color-violet-500: #a855f7;
+  --color-violet-600: #9333ea;
+}
+
+/* 4. Solar Amber (Sunset Gold) */
+[data-palette="amber"],
+:root[data-palette="amber"] {
+  --accent-primary: #f59e0b;
+  --accent-secondary: #fbbf24;
+  --accent-glow: rgba(245, 158, 11, 0.35);
+  --accent-subtle: rgba(245, 158, 11, 0.12);
+
+  --color-cyan-50: #fffbeb;
+  --color-cyan-100: #fef3c7;
+  --color-cyan-200: #fde68a;
+  --color-cyan-300: #fcd34d;
+  --color-cyan-400: #fbbf24;
+  --color-cyan-500: #f59e0b;
+  --color-cyan-600: #d97706;
+  --color-cyan-700: #b45309;
+  --color-cyan-800: #92400e;
+  --color-cyan-900: #78350f;
+  --color-cyan-950: #451a03;
+
+  --color-blue-50: #fffbeb;
+  --color-blue-100: #fef3c7;
+  --color-blue-200: #fde68a;
+  --color-blue-300: #fcd34d;
+  --color-blue-400: #fbbf24;
+  --color-blue-500: #f59e0b;
+  --color-blue-600: #d97706;
+  --color-blue-700: #b45309;
+  --color-blue-800: #92400e;
+  --color-blue-900: #78350f;
+  --color-blue-950: #451a03;
+
+  --color-sky-400: #fbbf24;
+  --color-sky-500: #f59e0b;
+  --color-sky-600: #d97706;
+
+  --color-indigo-400: #fb923c;
+  --color-indigo-500: #f97316;
+  --color-indigo-600: #ea580c;
+  --color-violet-400: #f87171;
+  --color-violet-500: #ef4444;
+  --color-violet-600: #dc2626;
+}
+
+/* 5. Crimson Ruby */
+[data-palette="rose"],
+:root[data-palette="rose"] {
+  --accent-primary: #f43f5e;
+  --accent-secondary: #fb7185;
+  --accent-glow: rgba(244, 63, 94, 0.35);
+  --accent-subtle: rgba(244, 63, 94, 0.12);
+
+  --color-cyan-50: #fff1f2;
+  --color-cyan-100: #ffe4e6;
+  --color-cyan-200: #fecdd3;
+  --color-cyan-300: #fda4af;
+  --color-cyan-400: #fb7185;
+  --color-cyan-500: #f43f5e;
+  --color-cyan-600: #e11d48;
+  --color-cyan-700: #be123c;
+  --color-cyan-800: #9f1239;
+  --color-cyan-900: #881337;
+  --color-cyan-950: #4c0519;
+
+  --color-blue-50: #fff1f2;
+  --color-blue-100: #ffe4e6;
+  --color-blue-200: #fecdd3;
+  --color-blue-300: #fda4af;
+  --color-blue-400: #fb7185;
+  --color-blue-500: #f43f5e;
+  --color-blue-600: #e11d48;
+  --color-blue-700: #be123c;
+  --color-blue-800: #9f1239;
+  --color-blue-900: #881337;
+  --color-blue-950: #4c0519;
+
+  --color-sky-400: #fb7185;
+  --color-sky-500: #f43f5e;
+  --color-sky-600: #e11d48;
+
+  --color-indigo-400: #f472b6;
+  --color-indigo-500: #ec4899;
+  --color-indigo-600: #db2777;
+  --color-violet-400: #e879f9;
+  --color-violet-500: #d946ef;
+  --color-violet-600: #c026d3;
+}

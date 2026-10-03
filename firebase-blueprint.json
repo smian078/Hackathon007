@@ -1,0 +1,102 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile for authenticated ProofPass users",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique Firebase Auth user ID" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User full display name" },
+        "photoURL": { "type": "string", "description": "User avatar profile image URL" },
+        "role": { "type": "string", "enum": ["HOLDER", "ISSUER", "VERIFIER", "AUDITOR"], "description": "User RBAC role" },
+        "organizationId": { "type": "string", "description": "Affiliated organization ID if any" },
+        "createdAt": { "type": "string", "description": "Account creation ISO timestamp" }
+      },
+      "required": ["uid", "email"]
+    },
+    "DocumentRecord": {
+      "title": "DocumentRecord",
+      "description": "Verifiable cryptographic document record anchored to ledger",
+      "type": "object",
+      "properties": {
+        "documentId": { "type": "string", "description": "Unique identifier e.g. DOC-2026-..." },
+        "title": { "type": "string", "description": "Document or credential title" },
+        "description": { "type": "string", "description": "Document description or details" },
+        "type": { "type": "string", "description": "Credential type category" },
+        "issuerId": { "type": "string", "description": "Issuer organization ID" },
+        "issuerName": { "type": "string", "description": "Issuer human-readable name" },
+        "issuerDomain": { "type": "string", "description": "Issuer DNS domain" },
+        "holderId": { "type": "string", "description": "Holder user ID or student ID" },
+        "holderName": { "type": "string", "description": "Full name of the recipient" },
+        "holderEmail": { "type": "string", "description": "Recipient email address" },
+        "documentHash": { "type": "string", "description": "SHA-256 cryptographic hash of document content" },
+        "signature": { "type": "string", "description": "Cryptographic ECDSA/Ed25519 signature" },
+        "merkleRoot": { "type": "string", "description": "Merkle root hash" },
+        "txHash": { "type": "string", "description": "Blockchain ledger transaction hash" },
+        "blockNumber": { "type": "number", "description": "Blockchain ledger block number" },
+        "issuedAt": { "type": "string", "description": "Issuance ISO timestamp" },
+        "status": { "type": "string", "enum": ["ISSUED", "VERIFIED", "REVOKED", "SUPERSEDED"], "description": "Credential lifecycle status" },
+        "currentVersion": { "type": "number", "description": "Current version sequence number" },
+        "fileSize": { "type": "string", "description": "Human-readable file size" },
+        "mimeType": { "type": "string", "description": "Content MIME type" },
+        "metadata": { "type": "object", "description": "Custom credential fields and properties" }
+      },
+      "required": ["documentId", "title", "documentHash", "issuedAt", "status"]
+    },
+    "DonationRecord": {
+      "title": "DonationRecord",
+      "description": "Traceable public donation receipt with invoice allocations",
+      "type": "object",
+      "properties": {
+        "donationId": { "type": "string", "description": "Donation identifier" },
+        "donorName": { "type": "string", "description": "Donor full name or Anonymous" },
+        "donorEmail": { "type": "string", "description": "Donor email address" },
+        "donorId": { "type": "string", "description": "User ID of donor" },
+        "campaignId": { "type": "string", "description": "Target campaign or project ID" },
+        "campaignTitle": { "type": "string", "description": "Campaign title" },
+        "amount": { "type": "number", "description": "Donation numeric amount" },
+        "currency": { "type": "string", "description": "Currency code e.g. INR, USD" },
+        "timestamp": { "type": "string", "description": "Donation ISO timestamp" },
+        "txHash": { "type": "string", "description": "Ledger transaction hash" },
+        "status": { "type": "string", "enum": ["CONFIRMED", "ALLOCATED", "SPENT"], "description": "Allocation status" }
+      },
+      "required": ["donationId", "amount", "campaignTitle", "timestamp"]
+    },
+    "AuditEvent": {
+      "title": "AuditEvent",
+      "description": "Immutable ledger audit trail event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Audit event ID" },
+        "documentId": { "type": "string", "description": "Target document ID if applicable" },
+        "eventType": { "type": "string", "description": "Action type e.g. ISSUANCE, VERIFICATION, REVOCATION" },
+        "description": { "type": "string", "description": "Human-readable event summary" },
+        "actor": { "type": "string", "description": "User or system that performed action" },
+        "actorRole": { "type": "string", "description": "Role of the actor" },
+        "timestamp": { "type": "string", "description": "Event ISO timestamp" },
+        "txHash": { "type": "string", "description": "Blockchain transaction hash" },
+        "blockNumber": { "type": "number", "description": "Block number" }
+      },
+      "required": ["id", "eventType", "description", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile store for authenticated accounts"
+    },
+    "/documents/{documentId}": {
+      "schema": "DocumentRecord",
+      "description": "Verifiable cryptographic credentials and document records"
+    },
+    "/donations/{donationId}": {
+      "schema": "DonationRecord",
+      "description": "Traceable public donations and transparent expenditure records"
+    },
+    "/audit_events/{eventId}": {
+      "schema": "AuditEvent",
+      "description": "Immutable audit events recording all verification and issuance actions"
+    }
+  }
+}
